@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070b14" />
+    <title>Hermes Signal Orbit</title>
+    <style>
+      :root {
+        --bg: #070b14;
+        --panel: #0c1220;
+        --panel-soft: #11192b;
+        --ink: #f3ead9;
+        --muted: #a7b1c2;
+        --amber: #ffb74d;
+        --amber-soft: #ffcc80;
+        --cyan: #67d9ff;
+        --violet: #8d9bff;
+        --green: #7ff1b5;
+        --line: #243147;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(255, 183, 77, 0.09), transparent 34%),
+          radial-gradient(circle at 80% 20%, rgba(103, 217, 255, 0.06), transparent 26%),
+          linear-gradient(180deg, #050812 0%, var(--bg) 100%);
+        color: var(--ink);
+      }
+      .wrap {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 32px 20px 40px;
+      }
+      .hero {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: stretch;
+      }
+      .title {
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: linear-gradient(135deg, rgba(255,183,77,0.10), rgba(103,217,255,0.06) 40%, rgba(141,155,255,0.05));
+        box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      }
+      .eyebrow {
+        color: var(--amber-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 12px;
+      }
+      h1 {
+        margin: 10px 0 12px;
+        font-size: clamp(44px, 7vw, 84px);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+      .lede {
+        max-width: 58ch;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: 18px;
+        padding: 18px;
+        min-height: 120px;
+      }
+      .card .k {
+        color: var(--cyan);
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .card .v {
+        margin-top: 10px;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .card .s {
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .poster {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 18px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(12, 18, 32, 0.94), rgba(11, 16, 28, 0.98));
+        border-radius: 24px;
+        padding: 22px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.30);
+      }
+      .svg-wrap {
+        min-height: 680px;
+        display: grid;
+        place-items: center;
+      }
+      .meta {
+        display: grid;
+        gap: 12px;
+      }
+      .meta .line {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(36,49,71,0.75);
+        font-size: 14px;
+      }
+      .meta .line:last-child { border-bottom: 0; }
+      .meta .label { color: var(--cyan); font-weight: 700; }
+      .meta .value { color: var(--ink); text-align: right; }
+      .slider {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+      }
+      .slider .track {
+        height: 10px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(103,217,255,0.18), rgba(255,183,77,0.22), rgba(141,155,255,0.18));
+        position: relative;
+        overflow: hidden;
+      }
+      .slider .knob {
+        position: absolute;
+        top: 50%;
+        left: 28%;
+        transform: translate(-50%, -50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #fff3d7, var(--amber));
+        box-shadow: 0 0 0 6px rgba(255,183,77,0.10), 0 0 32px rgba(255,183,77,0.35);
+      }
+      .footer {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      @media (max-width: 980px) {
+        .hero, .poster { grid-template-columns: 1fr; }
+        .svg-wrap { min-height: 560px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <div class="title">
+          <div class="eyebrow">Hermes Signal Orbit</div>
+          <h1>Animated control plane, rendered as a static poster.</h1>
+          <div class="lede">
+            The original notebook drives a phase slider through a Hermes-inspired orbit,
+            dispatch lanes, streaming MoA bands, and judgment thresholds. This HTML page
+            captures that composition as a clean export companion.
+          </div>
+        </div>
+        <div class="feature-grid">
+          <div class="card">
+            <div class="k">Dispatch</div>
+            <div class="v">8 lanes</div>
+            <div class="s">Agents orbit the hub and keep the ring populated.</div>
+          </div>
+          <div class="card">
+            <div class="k">Streaming MoA</div>
+            <div class="v">3 layers</div>
+            <div class="s">Amber, cyan, and violet bands move through phase.</div>
+          </div>
+          <div class="card">
+            <div class="k">Judgment</div>
+            <div class="v">0.28</div>
+            <div class="s">The center mark sits on a stable mid-sweep position.</div>
+          </div>
+          <div class="card">
+            <div class="k">Observability</div>
+            <div class="v">Trail ring</div>
+            <div class="s">A faint motion trail preserves the last transition arc.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="poster">
+        <div class="panel svg-wrap">
+          <svg viewBox="0 0 1100 760" width="100%" height="100%" role="img" aria-label="Hermes orbit poster">
+            <defs>
+              <radialGradient id="hubGlow" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#fff2d3" stop-opacity="1" />
+                <stop offset="40%" stop-color="#ffb74d" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#ffb74d" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="trailGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#8d9bff" stop-opacity="0.14" />
+                <stop offset="100%" stop-color="#67d9ff" stop-opacity="0.40" />
+              </linearGradient>
+              <linearGradient id="orbitGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffcc80" />
+                <stop offset="100%" stop-color="#ffb74d" />
+              </linearGradient>
+            </defs>
+
+            <rect x="0" y="0" width="1100" height="760" rx="28" fill="#070b14" />
+
+            <circle cx="420" cy="355" r="215" fill="none" stroke="#67d9ff" stroke-opacity="0.18" stroke-width="4" />
+            <circle cx="420" cy="355" r="145" fill="none" stroke="#ffb74d" stroke-opacity="0.16" stroke-width="3" />
+            <circle cx="420" cy="355" r="70" fill="url(#hubGlow)" />
+
+            <path d="M 260 315 C 350 245, 500 250, 575 345" fill="none" stroke="url(#trailGrad)" stroke-width="6" stroke-linecap="round" />
+            <path d="M 280 205 C 365 170, 476 185, 550 270" fill="none" stroke="#8d9bff" stroke-opacity="0.18" stroke-width="3" stroke-linecap="round" />
+
+            <path d="M 305 355
+                     C 315 290, 345 240, 420 220
+                     C 500 198, 570 240, 595 315
+                     C 620 392, 592 468, 525 510
+                     C 455 553, 360 545, 312 485
+                     C 286 452, 280 404, 305 355 Z"
+                  fill="rgba(255,183,77,0.08)" stroke="url(#orbitGrad)" stroke-width="5" />
+
+            <circle cx="420" cy="355" r="24" fill="#ffcc80" stroke="#f3ead9" stroke-width="3" />
+            <text x="420" y="360" text-anchor="middle" font-size="18" font-weight="700" fill="#070b14">HERMES</text>
+
+            <g fill="#67d9ff" stroke="#f3ead9" stroke-width="2">
+              <circle cx="620" cy="290" r="16" />
+              <circle cx="615" cy="425" r="16" />
+              <circle cx="530" cy="520" r="16" />
+              <circle cx="375" cy="555" r="16" />
+              <circle cx="250" cy="470" r="16" />
+              <circle cx="235" cy="315" r="16" />
+              <circle cx="295" cy="205" r="16" />
+              <circle cx="455" cy="175" r="16" />
+            </g>
+
+            <g stroke="#243147" stroke-width="2" opacity="0.55">
+              <line x1="420" y1="355" x2="620" y2="290" />
+              <line x1="420" y1="355" x2="615" y2="425" />
+              <line x1="420" y1="355" x2="530" y2="520" />
+              <line x1="420" y1="355" x2="375" y2="555" />
+              <line x1="420" y1="355" x2="250" y2="470" />
+              <line x1="420" y1="355" x2="235" y2="315" />
+              <line x1="420" y1="355" x2="295" y2="205" />
+              <line x1="420" y1="355" x2="455" y2="175" />
+            </g>
+
+            <g fill="#f3ead9" font-size="13" font-weight="700">
+              <text x="620" y="274" text-anchor="middle">A1</text>
+              <text x="615" y="409" text-anchor="middle">A2</text>
+              <text x="530" y="504" text-anchor="middle">A3</text>
+              <text x="375" y="539" text-anchor="middle">A4</text>
+              <text x="250" y="454" text-anchor="middle">A5</text>
+              <text x="235" y="299" text-anchor="middle">A6</text>
+              <text x="295" y="189" text-anchor="middle">A7</text>
+              <text x="455" y="159" text-anchor="middle">A8</text>
+            </g>
+
+            <text x="108" y="88" fill="#a7b1c2" font-size="20" letter-spacing="0.12em">DISPATCH LANES</text>
+            <text x="740" y="98" fill="#f3ead9" font-size="28" font-weight="700">Streaming MoA waveform</text>
+
+            <path d="M 740 170 C 790 120, 840 220, 890 170 S 990 220, 1040 170" fill="none" stroke="#ffb74d" stroke-width="5" stroke-linecap="round" />
+            <path d="M 740 235 C 800 320, 860 150, 920 235 S 1040 150, 1070 240" fill="none" stroke="#67d9ff" stroke-width="4" stroke-linecap="round" />
+            <path d="M 740 300 C 790 265, 835 340, 890 300 S 995 350, 1070 290" fill="none" stroke="#8d9bff" stroke-width="4" stroke-linecap="round" />
+            <line x1="740" y1="360" x2="1070" y2="360" stroke="#243147" stroke-width="2" />
+            <rect x="860" y="336" width="2" height="48" fill="#ffb74d" />
+
+            <text x="740" y="430" fill="#f3ead9" font-size="28" font-weight="700">Judgment threshold</text>
+            <rect x="740" y="470" width="330" height="16" rx="8" fill="#11192b" stroke="#243147" />
+            <rect x="740" y="470" width="186" height="16" rx="8" fill="rgba(141,155,255,0.38)" />
+            <rect x="896" y="462" width="5" height="32" rx="2.5" fill="#ffb74d" />
+            <text x="740" y="535" fill="#a7b1c2" font-size="18">low</text>
+            <text x="1042" y="535" fill="#a7b1c2" font-size="18" text-anchor="end">high</text>
+          </svg>
+        </div>
+
+        <aside class="panel">
+          <div class="eyebrow">Playback</div>
+          <div style="font-size: 44px; font-weight: 700; margin-top: 6px;">28%</div>
+          <div style="color: var(--cyan); margin-top: 6px; font-weight: 700;">forward sweep</div>
+
+          <div class="slider">
+            <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:10px;">
+              <span>Signal phase</span><span>0.280</span>
+            </div>
+            <div class="track"><div class="knob"></div></div>
+          </div>
+
+          <div class="meta" style="margin-top: 18px;">
+            <div class="line"><div class="label">Feature</div><div class="value">control plane</div></div>
+            <div class="line"><div class="label">Dispatch</div><div class="value">8 agents</div></div>
+            <div class="line"><div class="label">Observability</div><div class="value">ring + trail</div></div>
+            <div class="line"><div class="label">Judgment</div><div class="value">threshold crossing</div></div>
+          </div>
+
+          <div class="footer">
+            This page is a static HTML companion to the notebook view.
+          </div>
+        </aside>
+      </section>
+    </div>
+  </body>
+</html>

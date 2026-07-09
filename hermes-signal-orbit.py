@@ -2,8 +2,8 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #     "marimo",
-#     "numpy",
-#     "matplotlib",
+#     "numpy==2.4.6",
+#     "matplotlib==3.11.0",
 # ]
 # ///
 
@@ -73,19 +73,19 @@ def _(mo):
         </div>
         """
     )
-    return (theme,)
+    return theme
 
 
 @app.cell(hide_code=True)
 def _(mo):
     playback = mo.state({"running": True, "phase": 0.0, "speed": 0.025, "direction": 1})
-    return (playback,)
+    return playback
 
 
 @app.cell(hide_code=True)
 def _(mo):
     timer = mo.ui.refresh(options=["120ms", "250ms", "500ms"], default_interval="120ms")
-    return (timer,)
+    return timer
 
 
 @app.cell(hide_code=True)
@@ -243,7 +243,7 @@ def _(np, playback):
         "trail_y": trail_y,
         "phase": orbit_phase,
     }
-    return (layers,)
+    return layers
 
 
 @app.cell(hide_code=True)
