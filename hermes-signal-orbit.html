@@ -30,22 +30,21 @@
         color: var(--ink);
       }
       .wrap {
-        max-width: 1320px;
+        max-width: 1180px;
         margin: 0 auto;
-        padding: 32px 20px 40px;
+        padding: 20px 16px 28px;
       }
       .hero {
         display: grid;
-        gap: 18px;
-        grid-template-columns: 1.1fr 0.9fr;
-        align-items: stretch;
+        gap: 14px;
+        grid-template-columns: 1fr;
       }
       .title {
-        padding: 26px;
+        padding: 20px 22px;
         border: 1px solid var(--line);
-        border-radius: 24px;
+        border-radius: 20px;
         background: linear-gradient(135deg, rgba(255,183,77,0.10), rgba(103,217,255,0.06) 40%, rgba(141,155,255,0.05));
-        box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        box-shadow: 0 14px 44px rgba(0,0,0,0.30);
       }
       .eyebrow {
         color: var(--amber-soft);
@@ -55,60 +54,61 @@
       }
       h1 {
         margin: 10px 0 12px;
-        font-size: clamp(44px, 7vw, 84px);
+        font-size: clamp(36px, 5vw, 64px);
         line-height: 0.95;
         letter-spacing: -0.04em;
       }
       .lede {
-        max-width: 58ch;
+        max-width: 64ch;
         color: var(--muted);
-        font-size: 16px;
-        line-height: 1.6;
+        font-size: 15px;
+        line-height: 1.5;
       }
       .feature-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
       }
       .card {
         border: 1px solid var(--line);
         background: var(--panel);
-        border-radius: 18px;
-        padding: 18px;
-        min-height: 120px;
+        border-radius: 16px;
+        padding: 14px 15px;
+        min-height: 100px;
       }
       .card .k {
         color: var(--cyan);
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
       }
       .card .v {
-        margin-top: 10px;
-        font-size: 28px;
+        margin-top: 8px;
+        font-size: 24px;
         font-weight: 700;
         color: var(--ink);
       }
       .card .s {
-        margin-top: 8px;
+        margin-top: 6px;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.45;
+        font-size: 13px;
       }
       .poster {
-        margin-top: 18px;
+        margin-top: 14px;
         display: grid;
-        grid-template-columns: 1.3fr 0.7fr;
-        gap: 18px;
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 14px;
       }
       .panel {
         border: 1px solid var(--line);
         background: linear-gradient(180deg, rgba(12, 18, 32, 0.94), rgba(11, 16, 28, 0.98));
-        border-radius: 24px;
-        padding: 22px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.30);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: 0 14px 44px rgba(0,0,0,0.24);
       }
       .svg-wrap {
-        min-height: 680px;
+        min-height: 620px;
         display: grid;
         place-items: center;
       }
@@ -120,17 +120,17 @@
         display: flex;
         justify-content: space-between;
         gap: 14px;
-        padding: 12px 0;
+        padding: 10px 0;
         border-bottom: 1px solid rgba(36,49,71,0.75);
-        font-size: 14px;
+        font-size: 13px;
       }
       .meta .line:last-child { border-bottom: 0; }
       .meta .label { color: var(--cyan); font-weight: 700; }
       .meta .value { color: var(--ink); text-align: right; }
       .slider {
-        margin-top: 16px;
-        padding: 14px 16px;
-        border-radius: 16px;
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 14px;
         background: var(--panel-soft);
         border: 1px solid var(--line);
       }
@@ -153,13 +153,14 @@
         box-shadow: 0 0 0 6px rgba(255,183,77,0.10), 0 0 32px rgba(255,183,77,0.35);
       }
       .footer {
-        margin-top: 16px;
+        margin-top: 12px;
         color: var(--muted);
         font-size: 13px;
       }
       @media (max-width: 980px) {
         .hero, .poster { grid-template-columns: 1fr; }
-        .svg-wrap { min-height: 560px; }
+        .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .svg-wrap { min-height: 540px; }
       }
     </style>
   </head>
@@ -168,11 +169,10 @@
       <section class="hero">
         <div class="title">
           <div class="eyebrow">Hermes Signal Orbit</div>
-          <h1>Animated control plane, rendered as a static poster.</h1>
+          <h1>Animated control plane, static export.</h1>
           <div class="lede">
-            The original notebook drives a phase slider through a Hermes-inspired orbit,
-            dispatch lanes, streaming MoA bands, and judgment thresholds. This HTML page
-            captures that composition as a clean export companion.
+            The notebook drives a phase slider through an orbit, dispatch lanes, streaming MoA bands,
+            and judgment thresholds. This HTML page keeps the same composition with less chrome.
           </div>
         </div>
         <div class="feature-grid">
@@ -291,8 +291,8 @@
 
         <aside class="panel">
           <div class="eyebrow">Playback</div>
-          <div style="font-size: 44px; font-weight: 700; margin-top: 6px;">28%</div>
-          <div style="color: var(--cyan); margin-top: 6px; font-weight: 700;">forward sweep</div>
+          <div style="font-size: 40px; font-weight: 700; margin-top: 6px;">28%</div>
+          <div style="color: var(--cyan); margin-top: 4px; font-weight: 700;">forward sweep</div>
 
           <div class="slider">
             <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:10px;">
@@ -308,9 +308,7 @@
             <div class="line"><div class="label">Judgment</div><div class="value">threshold crossing</div></div>
           </div>
 
-          <div class="footer">
-            This page is a static HTML companion to the notebook view.
-          </div>
+          <div class="footer">Static companion to the notebook view.</div>
         </aside>
       </section>
     </div>
