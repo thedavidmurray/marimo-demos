@@ -3,7 +3,6 @@
 # dependencies = [
 #     "marimo",
 #     "numpy",
-#     "matplotlib",
 # ]
 # ///
 
@@ -42,37 +41,47 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    theme = {
-        "bg": "#060a12",
-        "panel": "#0c1220",
-        "panel_soft": "#11192b",
-        "ink": "#f4ecde",
-        "muted": "#a8b2c5",
-        "amber": "#f7b955",
-        "amber_soft": "#ffd48a",
-        "cyan": "#72d8ff",
-        "violet": "#9a9dff",
-        "green": "#7ce6bf",
-        "pink": "#ff8fb3",
-        "line": "#253147",
-    }
+    # Edgeless design tokens
+    teal = "#12b5a4"
+    coral = "#ff6b6b"
+    cyan = "#72d8ff"
+    violet = "#9a9dff"
+    amber = "#f7b955"
+    amber_soft = "#ffd48a"
+    green = "#7ce6bf"
+    pink = "#ff8fb3"
+    ink = "#f4ecde"
+    muted = "#a8b2c5"
+    bg = "#060a12"
+    panel = "#0c1220"
+    panel_soft = "#11192b"
+    line = "#253147"
+    mono = "'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace"
+
+    theme = dict(
+        teal=teal, coral=coral, cyan=cyan, violet=violet,
+        amber=amber, amber_soft=amber_soft, green=green, pink=pink,
+        ink=ink, muted=muted, bg=bg, panel=panel,
+        panel_soft=panel_soft, line=line, mono=mono,
+    )
 
     mo.md(
         f"""
         <div style="
-          padding: 1rem 1.1rem;
-          border: 1px solid {theme['line']};
-          border-radius: 18px;
-          background: linear-gradient(135deg, rgba(247,185,85,0.10), rgba(114,216,255,0.06) 45%, rgba(154,157,255,0.05));
-          color: {theme['ink']};
+          padding: 0.9rem 1rem;
+          border: 1px solid {line};
+          border-radius: 8px;
+          background: {panel};
+          color: {ink};
+          font-family: {mono};
         ">
-          <div style="font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase; color:{theme['amber_soft']};">
+          <div style="font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:{amber};">
             mastery trajectory + question generation + delivery
           </div>
-          <div style="margin-top:0.5rem; display:grid; gap:0.3rem; color:{theme['muted']}; line-height:1.45;">
-            <div><strong style="color:{theme['ink']};">Mastery trajectory:</strong> visualize growth across skills and time.</div>
-            <div><strong style="color:{theme['ink']};">Personalized QG:</strong> generate targeted prompts from the weakest skill.</div>
-            <div><strong style="color:{theme['ink']};">Multi-channel delivery:</strong> preview the same tutor packet for email, SMS, Discord, and dashboard.</div>
+          <div style="margin-top:0.4rem; display:grid; gap:0.25rem; color:{muted}; line-height:1.4; font-size:0.85rem;">
+            <div><strong style="color:{ink};">Mastery trajectory:</strong> visualize growth across skills and time.</div>
+            <div><strong style="color:{ink};">Personalized QG:</strong> generate targeted prompts from the weakest skill.</div>
+            <div><strong style="color:{ink};">Multi-channel delivery:</strong> preview the same tutor packet for email, SMS, Discord, and dashboard.</div>
           </div>
         </div>
         """
@@ -144,36 +153,36 @@ def _(mo):
 def _(dashboard, discord, email, sms):
     profiles = {
         "Avery": {
-            "tone": "encouraging and brisk",
-            "pace": 0.56,
-            "goal": "close algebra gaps before the exam sprint",
-            "strengths": ["procedural fluency", "graph reading"],
+            "tone": "irreverent, curiosity-first, and jargon-averse",
+            "pace": 0.59,
+            "goal": 'Richard Feynman | theoretical physics & science education | "What I cannot create, I do not understand."',
+            "strengths": ["first-principles reasoning", "experimental verification"],
         },
         "Jordan": {
-            "tone": "calm and structured",
-            "pace": 0.48,
-            "goal": "build durable recall in biology",
-            "strengths": ["vocabulary", "experiment design"],
+            "tone": "direct, decisive, and anti-bureaucratic",
+            "pace": 0.63,
+            "goal": 'Grace Hopper | computer science & programming | "It is better to beg forgiveness, than ask permission."',
+            "strengths": ["compiler thinking", "plain-language communication"],
         },
         "Mina": {
-            "tone": "precision-first",
-            "pace": 0.61,
-            "goal": "turn writing instincts into repeatable craft",
-            "strengths": ["argument structure", "revision"],
+            "tone": "austere, methodical, and evidence-led",
+            "pace": 0.5,
+            "goal": 'Marie Curie | radioactivity, chemistry, and medical physics | "I was taught that the way of progress was neither swift nor easy."',
+            "strengths": ["experimental discipline", "methodical analysis"],
         },
         "Sam": {
-            "tone": "story-driven and direct",
-            "pace": 0.52,
-            "goal": "connect historical patterns to current events",
-            "strengths": ["timeline sense", "source comparison"],
+            "tone": "humble, reflective, and growth-oriented",
+            "pace": 0.54,
+            "goal": 'Dirk Nowitzki | basketball & leadership | "Make mistakes and make bad decisions: you learn from them."',
+            "strengths": ["growth mindset", "mental toughness"],
         },
     }
 
     subject_skills = {
-        "Algebra": ["equations", "functions", "word problems", "graphs"],
-        "Biology": ["cells", "systems", "genetics", "experiments"],
-        "Writing": ["thesis", "evidence", "organization", "style"],
-        "World History": ["timeline", "causality", "comparison", "evidence"],
+        "Algebra": ["first-principles decomposition", "stepwise verification", "symbolic precision", "error checking"],
+        "Biology": ["careful observation", "systems mapping", "hypothesis testing", "evidence tracking"],
+        "Writing": ["clear explanation", "structured argument", "revision", "vivid analogy"],
+        "World History": ["context", "causality", "comparison", "narrative synthesis"],
     }
 
     channel_flags = {
@@ -334,42 +343,42 @@ def _(mo, payload, theme, tutor_packet):
         [
             mo.md(
                 f"""
-                <div style="padding:1rem 1.05rem;border-radius:16px;background:{theme['panel']};border:1px solid {theme['line']}">
-                  <div style="color:{theme['muted']};font-size:0.76rem;text-transform:uppercase;letter-spacing:0.12em;">Mode</div>
-                  <div style="margin-top:0.35rem;font-size:1.2rem;font-weight:700;color:{theme['ink']}">{tutor_packet.get('backend_mode', 'demo')}</div>
-                  <div style="color:{theme['cyan']};margin-top:0.1rem;">{tutor_packet.get('trace', 'Deterministic tutor model')}</div>
+                <div style="padding:0.75rem 0.9rem;border-radius:8px;background:{theme['panel']};border:1px solid {theme['line']};font-family:{theme['mono']};">
+                  <div style="color:{theme['muted']};font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;">Mode</div>
+                  <div style="margin-top:0.25rem;font-size:1rem;font-weight:700;color:{theme['ink']}">{tutor_packet.get('backend_mode', 'demo')}</div>
+                  <div style="color:{theme['cyan']};margin-top:0.05rem;font-size:0.78rem;">{tutor_packet.get('trace', 'Deterministic tutor model')}</div>
                 </div>
                 """
             ),
             mo.md(
                 f"""
-                <div style="padding:1rem 1.05rem;border-radius:16px;background:{theme['panel']};border:1px solid {theme['line']}">
-                  <div style="color:{theme['muted']};font-size:0.76rem;text-transform:uppercase;letter-spacing:0.12em;">Weakest skill</div>
-                  <div style="margin-top:0.35rem;font-size:1.2rem;font-weight:700;color:{theme['ink']}">{payload['weakest_skill']}</div>
-                  <div style="color:{theme['amber_soft']};margin-top:0.1rem;">{mastery_badge} mastery</div>
+                <div style="padding:0.75rem 0.9rem;border-radius:8px;background:{theme['panel']};border:1px solid {theme['line']};font-family:{theme['mono']};">
+                  <div style="color:{theme['muted']};font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;">Weakest skill</div>
+                  <div style="margin-top:0.25rem;font-size:1rem;font-weight:700;color:{theme['ink']}">{payload['weakest_skill']}</div>
+                  <div style="color:{theme['amber']};margin-top:0.05rem;font-size:0.78rem;">{mastery_badge} mastery</div>
                 </div>
                 """
             ),
             mo.md(
                 f"""
-                <div style="padding:1rem 1.05rem;border-radius:16px;background:{theme['panel']};border:1px solid {theme['line']}">
-                  <div style="color:{theme['muted']};font-size:0.76rem;text-transform:uppercase;letter-spacing:0.12em;">Strongest skill</div>
-                  <div style="margin-top:0.35rem;font-size:1.2rem;font-weight:700;color:{theme['ink']}">{payload['strongest_skill']}</div>
-                  <div style="color:{theme['green']};margin-top:0.1rem;">{strongest_badge} mastery</div>
+                <div style="padding:0.75rem 0.9rem;border-radius:8px;background:{theme['panel']};border:1px solid {theme['line']};font-family:{theme['mono']};">
+                  <div style="color:{theme['muted']};font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;">Strongest skill</div>
+                  <div style="margin-top:0.25rem;font-size:1rem;font-weight:700;color:{theme['ink']}">{payload['strongest_skill']}</div>
+                  <div style="color:{theme['green']};margin-top:0.05rem;font-size:0.78rem;">{strongest_badge} mastery</div>
                 </div>
                 """
             ),
             mo.md(
                 f"""
-                <div style="padding:1rem 1.05rem;border-radius:16px;background:{theme['panel']};border:1px solid {theme['line']}">
-                  <div style="color:{theme['muted']};font-size:0.76rem;text-transform:uppercase;letter-spacing:0.12em;">Channels</div>
-                  <div style="margin-top:0.35rem;font-size:1.2rem;font-weight:700;color:{theme['ink']}">{len(payload['channels'])} selected</div>
-                  <div style="color:{theme['violet']};margin-top:0.1rem;">{', '.join(payload['channels']) if payload['channels'] else 'none'}</div>
+                <div style="padding:0.75rem 0.9rem;border-radius:8px;background:{theme['panel']};border:1px solid {theme['line']};font-family:{theme['mono']};">
+                  <div style="color:{theme['muted']};font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;">Channels</div>
+                  <div style="margin-top:0.25rem;font-size:1rem;font-weight:700;color:{theme['ink']}">{len(payload['channels'])} selected</div>
+                  <div style="color:{theme['violet']};margin-top:0.05rem;font-size:0.78rem;">{', '.join(payload['channels']) if payload['channels'] else 'none'}</div>
                 </div>
                 """
             ),
         ],
-        gap=0.8,
+        gap=0.7,
     )
     return
 
@@ -468,15 +477,15 @@ def _(mo, payload, theme, tutor_packet):
         question_cards.append(
             mo.md(
                 f"""
-                <div style="padding:0.95rem 1rem;border-radius:14px;background:{theme['panel']};border:1px solid {theme['line']};margin-bottom:0.7rem;">
-                  <div style="color:{theme['amber_soft']};font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;">Question {question_idx + 1}</div>
-                  <div style="margin-top:0.35rem;color:{theme['ink']};line-height:1.55;">{question}</div>
+                <div style="padding:0.75rem 0.9rem;border-radius:8px;background:{theme['panel']};border:1px solid {theme['line']};margin-bottom:0.6rem;font-family:{theme['mono']};">
+                  <div style="color:{theme['amber']};font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;">Question {question_idx + 1}</div>
+                  <div style="margin-top:0.3rem;color:{theme['ink']};line-height:1.5;font-size:0.88rem;">{question}</div>
                 </div>
                 """
             )
         )
 
-    mo.vstack(question_cards, gap=0.2)
+    mo.vstack(question_cards, gap=0.15)
     return
 
 
@@ -488,12 +497,12 @@ def _(mo, theme, tutor_packet):
         message = delivery.get(channel_name, "Channel not selected.")
         return mo.md(
             f"""
-            <div style="padding:1rem 1.05rem;border-radius:16px;background:{theme['panel']};border:1px solid {theme['line']}">
+            <div style="padding:0.8rem 0.9rem;border-radius:8px;border:1px solid {theme['line']};background:{theme['panel']};font-family:{theme['mono']};">
               <div style="display:flex;justify-content:space-between;gap:1rem;align-items:baseline;">
-                <div style="color:{theme['cyan']};font-weight:700;">{headline}</div>
-                <div style="color:{theme['muted']};font-size:0.8rem;">{tone}</div>
+                <div style="color:{theme['cyan']};font-weight:700;font-size:0.88rem;">{headline}</div>
+                <div style="color:{theme['muted']};font-size:0.72rem;">{tone}</div>
               </div>
-              <pre style="white-space:pre-wrap;word-break:break-word;margin-top:0.8rem;color:{theme['ink']};font-size:0.92rem;line-height:1.55;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">{message}</pre>
+              <pre style="white-space:pre-wrap;word-break:break-word;margin-top:0.6rem;color:{theme['ink']};font-size:0.85rem;line-height:1.5;font-family:{theme['mono']};">{message}</pre>
             </div>
             """
         )
